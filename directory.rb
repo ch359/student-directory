@@ -3,6 +3,8 @@ def input_students
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
+  cohorts = ["january", "february", "march", "april", "june", "july", "august", "september",
+            "october", "november", "december"]
   # get the first name
   name = gets.chomp
 
@@ -11,7 +13,14 @@ def input_students
     # add the student hash to the array
     puts "Please enter a hobby:"
     hobby = gets.chomp
-    students << {name: name, cohort: :november, hobby: hobby}
+    puts "Please enter a cohort"
+    cohort = gets.chomp
+
+    if !cohorts.include?(cohort.downcase)
+      cohort = "november"
+    end
+
+    students << {name: name, cohort: cohort.to_sym, hobby: hobby}
     puts "Now we have #{students.count} students"
     # get another name from the user
     puts "Please enter a name:"
@@ -28,7 +37,7 @@ end
 
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort). Hobby: #{student[:hobby]}"
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort). Hobby: #{student[:hobby]}".center(80)
   end
 end
 
