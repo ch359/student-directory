@@ -35,7 +35,15 @@ def print_header
   puts "-------------"
 end
 
+def print_students_by_cohort(students)
+  student_cohorts = get_cohorts(students)
+  student_cohorts.each do
+    
+  end
+
 def print(students)
+
+
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort). Hobby: #{student[:hobby]}".center(80)
   end
@@ -43,6 +51,15 @@ end
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
+end
+
+def get_cohorts(student_array)
+  student_cohorts = []
+  student_array.each do |student|
+    if !student_cohorts.include?(student[:cohort])
+      student_cohorts.push()
+    end
+
 end
 
 students = input_students
