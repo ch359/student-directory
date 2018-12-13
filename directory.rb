@@ -51,7 +51,12 @@ def print_students(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  student_count = students.count
+  if student_count == 1
+    puts "Overall, we have #{student_count} great student."
+  else
+   puts "Overall, we have #{student_count} great students"
+  end
 end
 
 def get_cohorts(student_array)
