@@ -12,7 +12,7 @@ def input_students
   name = gets.chomp
 
   # while the name is not empty, repeat this code
-  while !name.empty? do
+  until name.empty? do
     # add the student hash to the array
     puts "Please enter a hobby:"
     hobby = gets.chomp
@@ -31,8 +31,8 @@ def input_students
   end
 end
 
-def print_students_by_cohort(students)
-  get_cohorts(students).each do |cohort, names|
+def print_students_by_cohort
+  get_cohorts(@students).each do |cohort, names|
     print "\n#{cohort} cohort students: "
     names.each { |name| print "#{name}, "}
   end
@@ -43,14 +43,14 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
-  students.each_with_index do |student, index|
+def print_students
+  @students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort). Hobby: #{student[:hobby]}".center(80)
   end
 end
 
-def print_footer(students)
-  student_count = students.count
+def print_footer
+  student_count = @students.count
   if student_count == 1
     puts "Overall, we have #{student_count} great student."
   else
@@ -71,7 +71,7 @@ def get_cohorts(student_array)
 end
 
 def interactive_menu
-  students = []
+
   loop do
     # 1. print the menu and ask the user what to do
     puts "1. Input the students"
@@ -82,11 +82,11 @@ def interactive_menu
     # 3. do what the user has asked
     case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
       print_header
-      print(students)
-      print_footer(students)
+      print_students
+      print_footer
     when "9"
       exit # this will cause the program to terminate
     else
