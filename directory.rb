@@ -1,7 +1,7 @@
 # create an empty array
 @students = []
 
-COHORTS =  ["january", "february", "march", "april", "june", "july", "august", "september",
+COHORTS =  ["january", "february", "march", "april", "may", "june", "july", "august", "september",
             "october", "november", "december"]
 
 def input_students
@@ -71,29 +71,35 @@ def get_cohorts(student_array)
 end
 
 def interactive_menu
-
   loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" # 9 because we'll be adding more items
-    # 2. read the input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def show_students
+  print_header
+  print_students
+  print_footer
+end
+
+def process(selection)
+  case selection
     when "1"
-      input_students
+    input_students
     when "2"
-      print_header
-      print_students
-      print_footer
+    show_students
     when "9"
-      exit # this will cause the program to terminate
+    exit # this will cause the program to terminate
     else
-      puts "I don't know what you meant, try again"
-    end
+    puts "I don't know what you meant, try again"
   end
 end
 
 interactive_menu
-#nothing happens until we call the methods
