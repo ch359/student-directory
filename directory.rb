@@ -1,11 +1,12 @@
+# create an empty array
+@students = []
+
 COHORTS =  ["january", "february", "march", "april", "june", "july", "august", "september",
             "october", "november", "december"]
 
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # create an empty array
-  students = []
 
   # get the first name
   name = gets.chomp
@@ -22,14 +23,12 @@ def input_students
       cohort = "november"
     end
 
-    students << {name: name, cohort: cohort.to_sym, hobby: hobby}
-    puts "Now we have #{students.count} students"
+    @students << {name: name, cohort: cohort.to_sym, hobby: hobby}
+    puts "Now we have #{@students.count} students"
     # get another name from the user
     puts "Please enter a name:"
     name = gets.chomp
   end
-  # return the array of students
-  students
 end
 
 def print_students_by_cohort(students)
