@@ -8,24 +8,30 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
 
-  # get the first name
-  name = STDIN.gets.chomp
-
-  # while the name is not empty, repeat this code
-  until name.empty? do
-    # add the student hash to the array
-    puts "Please enter a cohort"
-    cohort = STDIN.gets.chomp
-
-    if !COHORTS.include?(cohort.downcase)
-      cohort = "november"
-    end
+  loop do
+    name = get_name
+    break if name.empty?
+    cohort = get_cohort
     add_name_and_cohort(name, cohort)
     puts "Now we have #{@students.count} students"
-    # get another name from the user
-    puts "Please enter a name:"
-    name = STDIN.gets.chomp
   end
+end
+
+def get_name
+  puts "Please enter name:"
+  STDIN.gets.chomp
+end
+
+def get_cohort
+  puts "Please enter a cohort:"
+  validate_cohort(STDIN.gets.chomp)
+end
+
+def validate_cohort(cohort)
+  if !COHORTS.include?(cohort.downcase)
+    return "november"
+  end
+  cohort
 end
 
 def print_header
@@ -105,7 +111,6 @@ def try_load_students
 end
 
 def process(selection)
-
   case selection
     when "1"
       input_students
@@ -114,12 +119,12 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      load_students
+      try_load_students
     when "9"
       exit # this will cause the program to terminate
     else
     puts "I don't know what you meant, try again"
   end
 end
-p ARGV
+
 interactive_menu
