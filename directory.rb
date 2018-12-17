@@ -35,7 +35,7 @@ def validate_cohort(cohort)
 end
 
 def print_header
-  puts "The students of Villains Academy"
+  puts "The students of Villains' Academy"
   puts "-------------"
 end
 
@@ -76,22 +76,22 @@ def show_students
 end
 
 def save_students(filename = "students.csv")
-  file = File.open(filename, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
     add_name_and_cohort(name, cohort)
+    end
   end
-  file.close
 end
 
 def add_name_and_cohort(name, cohort)
@@ -111,7 +111,9 @@ end
 
 def ask_filename
   puts "Please enter the (relative) filename you wish to use, followed by enter"
-  STDIN.gets.chomp
+  file = STDIN.gets.chomp
+  return "students.csv" if file == ""
+  file
 end
 
 def menu_choices(selection)
@@ -130,7 +132,7 @@ def menu_choices(selection)
       try_load_students(ask_filename)
   when "9"
       puts "Quitting the program"
-      exit # this will cause the program to terminate
+      exit
     else
     puts "I don't know what you meant, try again"
   end
