@@ -14,8 +14,6 @@ def input_students
   # while the name is not empty, repeat this code
   until name.empty? do
     # add the student hash to the array
-    puts "Please enter a hobby:"
-    hobby = gets.chomp
     puts "Please enter a cohort"
     cohort = gets.chomp
 
@@ -23,18 +21,11 @@ def input_students
       cohort = "november"
     end
 
-    @students << {name: name, cohort: cohort.to_sym, hobby: hobby}
+    @students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{@students.count} students"
     # get another name from the user
     puts "Please enter a name:"
     name = gets.chomp
-  end
-end
-
-def print_students_by_cohort
-  get_cohorts(@students).each do |cohort, names|
-    print "\n#{cohort} cohort students: "
-    names.each { |name| print "#{name}, "}
   end
 end
 
@@ -45,7 +36,7 @@ end
 
 def print_students
   @students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort). Hobby: #{student[:hobby]}".center(80)
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort).".center(80)
   end
 end
 
@@ -56,18 +47,6 @@ def print_footer
   else
    puts "Overall, we have #{student_count} great students"
   end
-end
-
-def get_cohorts(student_array)
-  student_cohorts = {}
-  student_array.each do |student|
-    if student_cohorts.has_key?(student[:cohort])
-      student_cohorts[student[:cohort]].push(student[:name])
-    else
-      student_cohorts[student[:cohort]] = [student[:name]]
-    end
-  end
-  student_cohorts
 end
 
 def interactive_menu
